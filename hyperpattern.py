@@ -51,6 +51,9 @@ class HyperPattern:
     def does_pattern_have_twinned_instance(self) -> bool:
         """
         Check if this pattern occurs more than once as a child of a single parent.
+
+        Patterns containing related content often have a twinned instance.
+        One may want to ignore patterns without a twinned instance.
         """
         parents = set()
         for tag in self.tags_with_structure:
@@ -108,7 +111,7 @@ class HyperPatternHunter:
         n_instances_of_structure = len(tags_with_structure)
         return (n_instances_of_structure > 1)
 
-    def yield_hyperpatterns(self, must_be_twinned: bool = True) -> Iterator[HyperPattern]:
+    def yield_hyperpatterns(self) -> Iterator[HyperPattern]:
         """
         Yield hyperpatterns - maximally recurrent hyper structures in the html
         """
@@ -119,12 +122,4 @@ class HyperPatternHunter:
             )
             if is_recurrent_and_maximal:
                 # This is a hyper pattern.
-                hyperpattern = HyperPattern(structure, tags_with_structure)
-
-                if must_be_twinned and not hyperpattern.does_pattern_have_twinned_instance():
-                    # Patterns containing related content almost always have a twinned instance.
-                    # Ignoring patterns without a twinned instance can help speed up
-                    # downstream tasks.
-                    continue
-
-                yield hyperpattern
+                yield HyperPattern(structure, tags_with_structure)
