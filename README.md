@@ -1,6 +1,6 @@
 # HyperFrame
 
-HyperFrame structures related information in an HTML document by searching for recurrent patterns in it's element tree.
+HyperFrame structures related information in an HTML document by searching for recurrent patterns in its element tree.
 
 ## An example
 
