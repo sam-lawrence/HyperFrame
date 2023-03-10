@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "HyperFrame"
+version = "0.1.0"
+description = ""
+authors = ["SamB <58937194+sam-lawrence@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+beautifulsoup4 = "^4.11.2"
+pandas = "^1.5.3"
+lxml = "^4.9.2"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.1.1"
+flake8 = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
