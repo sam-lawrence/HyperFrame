@@ -6,7 +6,7 @@ HyperFrame structures related information in an HTML document by searching for r
 
 ```
 import requests
-from HyperFrame import find_and_create_hyperframes
+from hyperframe import find_and_create_hyperframes
 
 r = requests.get("https://wellhung.co.uk/")
 hyperframes = find_and_create_hyperframes(r.content)
