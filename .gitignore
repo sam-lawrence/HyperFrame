@@ -110,6 +110,13 @@ ENV/
 env.bak/
 venv.bak/
 
+# Dotenv
+.envrc
+.dotenv
+
+# vscode
+.vscode
+
 # Spyder project settings
 .spyderproject
 .spyproject
