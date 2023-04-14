@@ -8,6 +8,17 @@ version = "0.1.1"
 description = ""
 authors = ["SamB <58937194+sam-lawrence@users.noreply.github.com>"]
 readme = "README.md"
+repository = "https://github.com/sam-lawrence/HyperFrame"
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+]
+packages = [{ include = "hyperframe" }, { include = "hyperframe/py.typed" }]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
