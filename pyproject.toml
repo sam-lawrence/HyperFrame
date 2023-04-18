@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "hyperframe"
-version = "0.1.3"
+version = "0.1.3.dev0"
 description = ""
 authors = ["SamB <58937194+sam-lawrence@users.noreply.github.com>"]
 readme = "README.md"
