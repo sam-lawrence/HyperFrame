@@ -1,9 +1,9 @@
 name: Tag & Release
 
 on:
-  push:
+  pull_request:
     branches:
-      - 'main'
+      - main
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         run: poetry build
 
       - name: Get version
-        run: echo "VERSION=$(poetry version --short)" >>$GITHUB_OUTPUT
+        run: echo "VERSION=$(poetry version --short).dev0" >>$GITHUB_OUTPUT
         id: version
 
       - name: Tag with updated version
