@@ -1,11 +1,10 @@
 from collections import defaultdict
-from typing import Iterator
+from collections.abc import Iterator
 
-from bs4 import BeautifulSoup, Tag
 import pandas as pd
+from bs4 import BeautifulSoup, Tag
 
 from .tabulate import tabulate_from_hyperpattern_tags
-
 
 # Represents a structure defined by the elements in a section of the HTML tree e.g
 # (
