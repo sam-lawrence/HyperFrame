@@ -46,3 +46,12 @@ jobs:
 
       - name: Latest tag
         uses: EndBug/latest-tag@v1
+
+      - name: Configure pypi credentials
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          poetry config pypi-token.pypi "$PYPI_TOKEN"
+      - name: Publish to pypi
+        run: |
+          poetry publish
