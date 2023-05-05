@@ -13,13 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install poetry
+        run: pipx install poetry
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
-      - name: Install dev dependencies
-        run: python -m pip install --upgrade pip setuptools poetry
+          cache: 'poetry'
 
       - name: Build binary wheel and a source tarball
         run: poetry build
@@ -41,7 +42,7 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           generateReleaseNotes: true
-          artifacts: './dist/hyperframe-${{ steps.tag_version.outputs.new_version }}.tar.gz,./dist/hyperframe-${{ steps.tag_version.outputs.new_version }}-py3-none-any.whl'
+          artifacts: './dist/html_hyperframe-${{ steps.tag_version.outputs.new_version }}.tar.gz,./dist/html_hyperframe-${{ steps.tag_version.outputs.new_version }}-py3-none-any.whl'
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Latest tag
