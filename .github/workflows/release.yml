@@ -41,7 +41,7 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           generateReleaseNotes: true
-          artifacts: './dist/hyperframe-${{ steps.tag_version.outputs.new_version }}.tar.gz,./dist/hyperframe-${{ steps.tag_version.outputs.new_version }}-py3-none-any.whl'
+          artifacts: './dist/html_hyperframe-${{ steps.tag_version.outputs.new_version }}.tar.gz,./dist/html_hyperframe-${{ steps.tag_version.outputs.new_version }}-py3-none-any.whl'
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Latest tag
