@@ -3,7 +3,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "hyperframe"
+name = "html-hyperframe"
 version = "0.1.4"
 description = ""
 authors = ["SamB <58937194+sam-lawrence@users.noreply.github.com>"]
