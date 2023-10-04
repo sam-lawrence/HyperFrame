@@ -6,3 +6,6 @@ flake8 .
 
 # mypy
 mypy --package hyperframe
+
+# Run tests
+pytest tests --cov

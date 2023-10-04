@@ -32,6 +32,18 @@ flake8 = "^6.0.0"
 types-beautifulsoup4 = "^4.12.0.3"
 pandas-stubs = "^2.0.0.230412"
 ipython = "^8.12.0"
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov"
+
+[tool.coverage.run]
+branch = true
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
 
 [tool.mypy]
 disallow_untyped_defs = true
