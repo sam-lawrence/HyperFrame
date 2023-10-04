@@ -6,13 +6,15 @@ import pytest
 from bs4 import BeautifulSoup
 from pandas._testing import assert_frame_equal
 
+from hyperframe import find_and_create_hyperframes
 from hyperframe.hyperpattern import HyperPatternHunter
 
 EXPECTED_HYPERFRAMES_PATH = "tests/fixtures/beauhurst_expected_hyperframe_fixture.json"
 BEAUHURST_HTML_PATH = "tests/fixtures/beauhurst_scrapedpage_html.gz"
 
-@pytest.fixture
-def get_expected_hyperframes() -> list[pd.DataFrame]:
+
+@pytest.fixture()
+def expected_hyperframes() -> list[pd.DataFrame]:
     expected_hyperframes = []
     with open(EXPECTED_HYPERFRAMES_PATH) as fd:
         fixture_data = json.load(fd)
@@ -26,26 +28,42 @@ def get_expected_hyperframes() -> list[pd.DataFrame]:
     return expected_hyperframes
 
 
-@pytest.fixture
-def get_beauhurst_html_soup() -> BeautifulSoup:
+@pytest.fixture()
+def beauhurst_html_soup() -> BeautifulSoup:
     with gzip.open(BEAUHURST_HTML_PATH, "r") as fd:
         html = fd.read()
     return BeautifulSoup(html, "lxml")
 
 
-def test_hyperframes_from_page() -> None:
-    # Get the beauhurst website html fixture as soup
-    beauhurst_soup = get_beauhurst_html_soup()
+@pytest.fixture()
+def beauhurst_html() -> str:
+    with gzip.open(BEAUHURST_HTML_PATH, "r") as fd:
+        html = fd.read().decode("utf-8")
+    return html
 
-    # Get the expected hyperframe fixture
-    expected_hyperframes = get_expected_hyperframes()
 
+def test_hyperframes_from_page(
+    expected_hyperframes: list[pd.DataFrame], beauhurst_html_soup: BeautifulSoup
+) -> None:
     # Extract hyperframes from the soup
-    pattern_hunter = HyperPatternHunter(beauhurst_soup)
+    pattern_hunter = HyperPatternHunter(beauhurst_html_soup)
     hyperframes = [
         hyperpattern.get_hyperframe()
         for hyperpattern in pattern_hunter.yield_hyperpatterns()
     ]
+
+    # Assert we have the correct number of hyperframes
+    assert len(hyperframes) == len(expected_hyperframes)
+
+    # Assert we have the correct hyperframes
+    for idx in range(len(hyperframes)):
+        assert_frame_equal(hyperframes[idx], expected_hyperframes[idx])
+
+
+def test_find_and_create_hyperframes(
+    expected_hyperframes: list[pd.DataFrame], beauhurst_html: str
+) -> None:
+    hyperframes = find_and_create_hyperframes(beauhurst_html)
 
     # Assert we have the correct number of hyperframes
     assert len(hyperframes) == len(expected_hyperframes)
