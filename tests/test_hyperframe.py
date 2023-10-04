@@ -16,7 +16,8 @@ def get_expected_hyperframes() -> list[pd.DataFrame]:
     with open(EXPECTED_HYPERFRAMES_PATH) as fd:
         fixture_data = json.load(fd)
         for frame_data, frame_columns in zip(
-            fixture_data["data"], fixture_data["columns"], strict=True
+            fixture_data["data"],
+            fixture_data["columns"],
         ):
             # hyperframe columns are tuples, not lists (thanks json)
             columns = [tuple(col) for col in frame_columns]
