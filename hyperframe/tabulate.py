@@ -1,11 +1,9 @@
-from typing import Union
-
 import pandas as pd
 from bs4 import NavigableString, Tag
 
 # A path to some content within a hyper structure
 # e.g (div, 0, div, 2, p, text)
-HYPER_PATH = tuple[Union[str, int], ...]
+HYPER_PATH = tuple[str | int, ...]
 
 
 def get_cleaned_attributes(tag: Tag) -> dict[str, str]:

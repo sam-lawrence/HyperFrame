@@ -26,7 +26,7 @@ def get_tag_structures(tag: Tag) -> dict[Tag, HYPER_STRUCTURE]:
     substructure = []
     inner_tags = (element for element in tag if isinstance(element, Tag))
 
-    for i, inner_tag in enumerate(inner_tags):
+    for inner_tag in inner_tags:
         inner_tag_structures = get_tag_structures(inner_tag)
         inner_structure = inner_tag_structures[inner_tag]
         tag_structures.update(inner_tag_structures)
@@ -43,6 +43,7 @@ class HyperPattern:
     is both "maximal" and "recurrent".  (See is_structure_maximal and
     is_a_recurrent_structure).
     """
+
     def __init__(self, structure: HYPER_STRUCTURE, tags_with_structure: list[Tag]):
         self.structure = structure
         self.tags_with_structure = tags_with_structure
@@ -108,17 +109,16 @@ class HyperPatternHunter:
         Does this structure occur more than once?
         """
         n_instances_of_structure = len(tags_with_structure)
-        return (n_instances_of_structure > 1)
+        return n_instances_of_structure > 1
 
     def yield_hyperpatterns(self) -> Iterator[HyperPattern]:
         """
         Yield hyperpatterns - maximally recurrent hyper structures in the html
         """
         for structure, tags_with_structure in self.tags_by_structure.items():
-            is_recurrent_and_maximal = (
-                self.is_a_recurrent_structure(tags_with_structure) and
-                self.is_structure_maximal(tags_with_structure)
-            )
+            is_recurrent_and_maximal = self.is_a_recurrent_structure(
+                tags_with_structure
+            ) and self.is_structure_maximal(tags_with_structure)
             if is_recurrent_and_maximal:
                 # This is a hyper pattern.
                 yield HyperPattern(structure, tags_with_structure)
