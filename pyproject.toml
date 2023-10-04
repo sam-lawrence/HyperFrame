@@ -23,7 +23,7 @@ packages = [{ include = "hyperframe" }, { include = "hyperframe/py.typed" }]
 [tool.poetry.dependencies]
 python = "^3.9"
 beautifulsoup4 = "^4.11.2"
-pandas = "^1.5.3"
+pandas = "^2.0.3"
 lxml = "^4.9.2"
 
 [tool.poetry.group.dev.dependencies]
