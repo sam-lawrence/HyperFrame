@@ -11,4 +11,4 @@ black --check --diff .
 mypy --package hyperframe
 
 # Run tests
-pytest tests
+pytest tests --cov
