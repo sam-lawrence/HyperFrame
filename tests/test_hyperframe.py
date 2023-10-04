@@ -2,6 +2,7 @@ import gzip
 import json
 
 import pandas as pd
+import pytest
 from bs4 import BeautifulSoup
 from pandas._testing import assert_frame_equal
 
@@ -10,7 +11,7 @@ from hyperframe.hyperpattern import HyperPatternHunter
 EXPECTED_HYPERFRAMES_PATH = "tests/fixtures/beauhurst_expected_hyperframe_fixture.json"
 BEAUHURST_HTML_PATH = "tests/fixtures/beauhurst_scrapedpage_html.gz"
 
-
+@pytest.fixture
 def get_expected_hyperframes() -> list[pd.DataFrame]:
     expected_hyperframes = []
     with open(EXPECTED_HYPERFRAMES_PATH) as fd:
@@ -25,6 +26,7 @@ def get_expected_hyperframes() -> list[pd.DataFrame]:
     return expected_hyperframes
 
 
+@pytest.fixture
 def get_beauhurst_html_soup() -> BeautifulSoup:
     with gzip.open(BEAUHURST_HTML_PATH, "r") as fd:
         html = fd.read()
