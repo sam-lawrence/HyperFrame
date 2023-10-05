@@ -2,7 +2,13 @@
 set -x -e
 
 # ruff
-flake8 .
+ruff check .
+
+# black
+black --check --diff .
 
 # mypy
-mypy --package hyperframe
+mypy
+
+# Run tests
+pytest

@@ -5,7 +5,7 @@ from bs4 import NavigableString, Tag
 
 # A path to some content within a hyper structure
 # e.g (div, 0, div, 2, p, text)
-HYPER_PATH = tuple[Union[str, int], ...]
+HyperPath = tuple[Union[str, int], ...]
 
 
 def get_cleaned_attributes(tag: Tag) -> dict[str, str]:
@@ -19,15 +19,15 @@ def get_cleaned_attributes(tag: Tag) -> dict[str, str]:
     return attributes
 
 
-def extract_content_from_tag(tag: Tag) -> dict[HYPER_PATH, str]:
-    content_by_hyperpath: dict[HYPER_PATH, str] = {
+def extract_content_from_tag(tag: Tag) -> dict[HyperPath, str]:
+    content_by_hyperpath: dict[HyperPath, str] = {
         (tag.name, attr): content
         for attr, content in get_cleaned_attributes(tag).items()
     }
 
     for i, inner_element in enumerate(tag):
         if isinstance(inner_element, NavigableString):
-            element_path: HYPER_PATH = (tag.name, i, "text")
+            element_path: HyperPath = (tag.name, i, "text")
             content_by_hyperpath[element_path] = str(inner_element).strip()
 
         if isinstance(inner_element, Tag):
