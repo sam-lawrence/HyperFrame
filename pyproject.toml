@@ -58,6 +58,7 @@ known-first-party = ["hyperframe"]
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "--cov"
+testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
@@ -67,5 +68,6 @@ omit = ["tests/*"]
 show_missing = true
 
 [tool.mypy]
+packages = ["hyperframe"]
 disallow_untyped_defs = true
 show_error_codes = true

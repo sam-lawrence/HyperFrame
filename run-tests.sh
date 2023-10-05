@@ -8,7 +8,7 @@ ruff check .
 black --check --diff .
 
 # mypy
-mypy --package hyperframe
+mypy
 
 # Run tests
-pytest tests --cov
+pytest
