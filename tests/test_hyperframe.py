@@ -13,7 +13,7 @@ EXPECTED_HYPERFRAMES_PATH = "tests/fixtures/beauhurst_expected_hyperframe_fixtur
 BEAUHURST_HTML_PATH = "tests/fixtures/beauhurst_scrapedpage_html.gz"
 
 
-@pytest.fixture()
+@pytest.fixture
 def expected_hyperframes() -> list[pd.DataFrame]:
     expected_hyperframes = []
     with open(EXPECTED_HYPERFRAMES_PATH) as fd:
@@ -21,6 +21,7 @@ def expected_hyperframes() -> list[pd.DataFrame]:
         for frame_data, frame_columns in zip(
             fixture_data["data"],
             fixture_data["columns"],
+            strict=True,
         ):
             # hyperframe columns are tuples, not lists (thanks json)
             columns = [tuple(col) for col in frame_columns]
@@ -28,14 +29,14 @@ def expected_hyperframes() -> list[pd.DataFrame]:
     return expected_hyperframes
 
 
-@pytest.fixture()
+@pytest.fixture
 def beauhurst_html_soup() -> BeautifulSoup:
     with gzip.open(BEAUHURST_HTML_PATH, "r") as fd:
         html = fd.read()
     return BeautifulSoup(html, "lxml")
 
 
-@pytest.fixture()
+@pytest.fixture
 def beauhurst_html() -> str:
     with gzip.open(BEAUHURST_HTML_PATH, "r") as fd:
         html = fd.read().decode("utf-8")

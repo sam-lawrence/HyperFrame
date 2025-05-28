@@ -4,8 +4,8 @@ set -x -e
 # ruff
 ruff check .
 
-# black
-black --check --diff .
+## Check formatting
+ruff format --check .
 
 # mypy
 mypy
