@@ -29,7 +29,6 @@ pandas = "^2.0.3"
 lxml = "^4.9.2"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23"
 ipython = "^8.12.0"
 mypy = "^1.1.1"
 pandas-stubs = "^2.0.0.230412"
@@ -39,21 +38,21 @@ ruff = "^0.0"
 types-beautifulsoup4 = "^4.12.0.3"
 
 [tool.ruff]
-target-version = "py39"
-select = ["B", "COM819", "C4", "E", "F", "I", "PT", "Q", "UP", "W"]
-ignore = ["E501"]
+target-version = "py311"
+lint.select = ["B", "COM819", "C4", "E", "F", "I", "PT", "Q", "UP", "W"]
+lint.ignore = ["E501"]
 # Avoid trying to fix flake8-bugbear (`B`) violations.
 src = ["hyperframe", "tests"]
-unfixable = ["B"]
+lint.unfixable = ["B"]
 extend-exclude = [".venv", ".git", "__pycache__", "build", "dist", "tmp"]
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.mccabe]
 max-complexity = 12
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 combine-as-imports = true
 known-first-party = ["hyperframe"]
 
